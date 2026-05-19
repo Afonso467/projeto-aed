@@ -5,7 +5,9 @@ import java.util.Scanner;
  */
 public class Main {
 
+    static LinhaAutocarro linhaAutocarro = new LinhaAutocarro();
     public static void main(String[] args) {
+        
 
         Scanner scanner = new Scanner(System.in);
 
@@ -32,11 +34,22 @@ public class Main {
             switch (opcao) {
 
                 case 1:
-                    System.out.println(">> Criar linha de autocarro");
+                    criarLinha();
                     break;
 
                 case 2:
-                    System.out.println(">> Adicionar/remover paragens");
+                    opcao = 0;
+                    do {
+                        System.out.print("1 - Remover paragem: | 2 - Adicionar paragem");
+                        System.out.print("Opção: \n");
+                        opcao = scanner.nextInt();
+
+                        if(opcao == 1) {
+
+                        } else if (opcao == 2) {
+
+                        }
+                    } while (opcao != 1 && opcao != 2);
                     break;
 
                 case 3:
@@ -52,7 +65,11 @@ public class Main {
                     break;
 
                 case 6:
-                    System.out.println(">> Mostrar estado atual");
+                    System.out.println("\n==============================");
+                    System.out.println("   Estado Atual da Linha   ");
+                    System.out.println("==============================");
+                    estadoLinha();
+                    System.out.println("==============================");
                     break;
 
                 case 7:
@@ -65,34 +82,71 @@ public class Main {
 
                 default:
                     System.out.println("Opção inválida.");
+                    
             }
 
         } while (opcao != 0);
 
-        scanner.close();
+        scanner.close();        
+        // testLinhaAutocarro();
+        testAutocarro();
+        testParagem();
+        testPassageiro();
     }
 
-    public void criarLinha() {
-        return;
+    /* Funções declaração */
+    
+    private static void testParagem() {
+        
+    }
+    private static void testAutocarro() {
+        
+    }
+    private static void testPassageiro() {
+        
     }
 
-    public void mudarParagens() {
-        return;
+    /* Opções menu */
+    private static void criarLinha() {
+        
+        /* Verificar se a linha está vazia antes de criar a linha */
+        /*if (linhaAutocarro) {
+
+        }*/
+        linhaAutocarro.inserir_paragem("A", 10);
+        linhaAutocarro.inserir_paragem("B", 20);
+        linhaAutocarro.inserir_paragem("C", 12);
+        linhaAutocarro.inserir_paragem("D", 0);
+        linhaAutocarro.inserir_paragem("E", 4);
+
+        linhaAutocarro.listar_percurso();
+        linhaAutocarro.remover_paragem("B");
+
+
+        System.out.print("Linha criada.");
+    }
+
+    public void adicionarParagem(String nome, int numeroPassageiros) {
+        linhaAutocarro.inserir_paragem(nome, numeroPassageiros);
+    }
+
+    public void removerParagem(String nome) {
+        linhaAutocarro.remover_paragem(nome);
     }
 
     public void adicionarPassageiros(String nome) {
-        return;
+        
     }
 
     public void simularChegada() {
-        return;
+        
     }
 
     public void ordenarParagens(int order) {
-        return;
+        
     }
 
-    public void estadoLinha() {
-        return;
+    public static void estadoLinha() {
+        linhaAutocarro.listar_percurso();
     }
 }
