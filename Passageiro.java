@@ -1,11 +1,11 @@
 public class Passageiro {
-    String nome;;
+    String nome; //guarda o nome do passageiro
 
-    public Passageiro(String p_nome) {
-        this.nome = p_nome;
+    public Passageiro(String p_nome) { 
+        this.nome = p_nome; //cria o passageiro e damos o nome
     }
 
-    public String get_nome() {
-        return this.nome;
+    public String getNome() {
+        return this.nome; //permite ler o nome do passageiro
     }
 }
