@@ -46,4 +46,44 @@ public class LinkedListParagens {
             atual.next = atual.next.next;
         }
     }
+
+    public int numero_paragens() {
+
+        int contador = 0;
+        NodeParagem atual = head;
+
+        while (atual != null) {
+            atual = atual.next;
+            contador++;
+        }
+
+        return contador;
+    }
+
+    /* Selection Sort */
+    public void ordenar_por_numero(String nome) {
+        NodeParagem atual = head;
+
+        while (atual != null) {
+
+            NodeParagem head = atual;
+            NodeParagem next = atual.next;
+
+            while (next != null) {
+
+                if (next.paragem.fila.totalPassageiros() < head.paragem.fila.totalPassageiros()) {
+                    head = next;
+                }
+                next = next.next;
+            }
+
+            if (head != atual) {
+                Paragem temp = atual.paragem;
+                atual.paragem = head.paragem;
+                head.paragem = temp;
+            }
+
+            atual = atual.next;
+        }
+    }
 }
