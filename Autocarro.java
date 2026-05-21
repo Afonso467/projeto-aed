@@ -1,82 +1,72 @@
-public class No {
-    Passageiro passageiro; //passageiro objeto/dado
-    No proximo; //ligação ao proximo nó
-
-    public No(Passageiro passageiro){
-        this.passageiro = passageiro;
-        this.proximo = null;
-    }
-}
 
 public class Autocarro {
 
-    private No inicio; //aponta para o inicio do no ou seja primeiro passageiro
-    private int totalPassageiros; //contador de passageiros
+    private NodeAutocarro inicio; // aponta para o inicio do no ou seja primeiro passageiro
+    private int totalPassageiros; // contador de passageiros
 
-    public Autocarro(){
+    public Autocarro() {
         this.inicio = null;
         this.totalPassageiros = 0;
     }
 
-    public void entrada_passageiros(Passageiro p){
+    public void entrada_passageiros(Passageiro p) {
 
-        No novo = new No(p); 
+        NodeAutocarro newNode = new NodeAutocarro(p);
 
-        if (inicio == null){
-            inicio = novo; //se o autocarro estiver vazio cria um novo no
-        } 
-
+        if (inicio == null) {
+            inicio = newNode; // se o autocarro estiver vazio cria um novo no
+        }
         totalPassageiros++;
 
         System.out.println(p.getNome() + " entrou no autocarro");
     }
 
-    public void saida_passageiros(String nome){
+    public void saida_passageiros(String nome) {
 
-        if (inicio == null){
+        if (inicio == null) {
             System.out.println("Autocarro vazio");
             return;
         }
 
-        if (inicio.passageiro.getNome().equalsIgnoreCase(nome)){ //remove as pessoas pelo nome, caso 1 ser o primeiro
+        if (inicio.passageiro.getNome().equalsIgnoreCase(nome)) { // remove as pessoas pelo nome, caso 1 ser o primeiro
             System.out.println(inicio.passageiro.getNome() + " saiu do autocarro");
-            inicio = inicio.proximo; //remove o 1 nó
+            inicio = inicio.next; // remove o 1 nó
             totalPassageiros--;
             return;
         }
 
-        No atual = inicio;
+        NodePassageiro atual = inicio;
 
-        while (atual.proximo != null){ //procura o nó antes da pessoa
-            if (atual.proximo.passageiro.getNome().equalsIgnoreCase(nome)){
+        while (atual.next != null) { // procura o nó antes da pessoa
+            if (atual.next.passageiro.getNome().equalsIgnoreCase(nome)) {
 
-                System.out.println(atual.proximo.passageiro.getNome() + " saiu do autocarro");
+                System.out.println(atual.next.passageiro.getNome() + " saiu do autocarro");
 
-                atual.proximo = atual.proximo.proximo;
+                atual.next = atual.next.next;
                 totalPassageiros--;
 
                 return;
             }
 
-            atual = atual.proximo;
+            atual = atual.next;
         }
 
         System.out.println("Passageiro não encontrado");
     }
 
-    public void mostrarPassageiros(){
+    public void mostrarPassageiros() {
 
-        No atual = inicio;
+        NodeAutocarro atual = inicio;
 
         System.out.println("Passageiros no autocarro:");
 
-        while (atual != null){ //percore a lista e imprime nomes
+        while (atual != null) { // percore a lista e imprime nomes
             System.out.println("- " + atual.passageiro.getNome());
             atual = atual.proximo;
         }
     }
 
-    public int getTotalPassageiros(){
+    public int getTotalPassageiros() {
         return totalPassageiros;
     }
 }
