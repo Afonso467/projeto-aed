@@ -6,4 +6,8 @@ public class Passageiro {
         this.nome = p_nome;
         this.numero = p_numero;
     }
+
+    public String get_nome() {
+        return this.nome;
+    }
 }
