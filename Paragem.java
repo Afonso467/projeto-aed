@@ -3,40 +3,31 @@
 
 public class Paragem {
 
-    /**
-     * Classe para criar uma 'Paragem', semelhante à sua versão na vida
-     * 
-     * @param nome                 : nome da paragem
-     * @param nPassageirosEmEspera : numero de passageiros em espera
-     **/
     String nome;
-    int nPassageirosEmEspera;
+    FilaPassageiros fila;
 
     public Paragem(String nome, int nPassageiros) {
         this.nome = nome;
-        this.nPassageirosEmEspera = nPassageiros;
+        this.fila = new FilaPassageiros();
     }
 
-    public void adicionar_passageiro(String nome) {
-        /**
-         * Método para adicionar passageiro (singular) à classe 'Paragem'
-         * 
-         * @param nome : nome do passageiro
-         *
-         **/
-        this.nPassageirosEmEspera++;
+    public void adicionar_passageiro(Passageiro p) {
+        fila.adicionarPassageiro(p);
     }
 
-    public void remover_passageiros(int nRemocao) {
-
-        if (nRemocao > nPassageirosEmEspera) {
-            System.out.print("Impossivel remover mais passageiros do que existem");
-        }
-
-        nPassageirosEmEspera -= nRemocao;
+    public void remover_passageiro() {
+        fila.removerPassageiro();
     }
 
-    public void numero_passageiros_em_espera() {
+    public void passageiros_em_espera(Paragem p) {
+        System.out.print("Nª em espera: " + fila.totalPassageiros());
+    }
 
+    public void mostrar_fila() {
+        fila.mostrarFila();
+    }
+
+    public String get_nome() {
+        return nome;
     }
 }

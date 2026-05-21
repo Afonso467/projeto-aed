@@ -1,40 +1,34 @@
 public class FilaPassageiros {
 
-    private NoPassageiro inicio;
-    private NoPassageiro fim;
+    private NodePassageiro inicio;
+    private NodePassageiro fim;
 
     public FilaPassageiros() {
         inicio = null;
         fim = null;
     }
 
-    public void adicionarPassageiro(String nome) {
+    public void adicionarPassageiro(Passageiro p) {
 
-        Passageiro p = new Passageiro(nome);
-
-        NoPassageiro novo = new NoPassageiro(p);
+        NodePassageiro novo = new NodePassageiro(p);
 
         if (inicio == null) {
-
             inicio = novo;
             fim = novo;
-
         } else {
-
-            fim.proximo = novo;
+            fim.next = novo;
             fim = novo;
         }
     }
 
-    public Passageiro embarcarPassageiro() {
+    public Passageiro removerPassageiro() {
 
         if (inicio == null) {
             return null;
         }
 
         Passageiro p = inicio.passageiro;
-
-        inicio = inicio.proximo;
+        inicio = inicio.next;
 
         if (inicio == null) {
             fim = null;
@@ -46,14 +40,11 @@ public class FilaPassageiros {
     public int totalPassageiros() {
 
         int contador = 0;
-
-        NoPassageiro atual = inicio;
+        NodePassageiro atual = inicio;
 
         while (atual != null) {
-
+            atual = atual.next;
             contador++;
-
-            atual = atual.proximo;
         }
 
         return contador;
@@ -67,14 +58,14 @@ public class FilaPassageiros {
             return;
         }
 
-        NoPassageiro atual = inicio;
+        NodePassageiro atual = inicio;
 
         while (atual != null) {
 
             System.out.println("- " +
-                    atual.passageiro.getNome());
+                    atual.passageiro.get_nome());
 
-            atual = atual.proximo;
+            atual = atual.next;
         }
     }
 }

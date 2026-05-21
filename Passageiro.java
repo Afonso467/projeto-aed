@@ -1,10 +1,8 @@
 public class Passageiro {
-    String nome;
-    int numero;
+    String nome;;
 
-    public Passageiro(String p_nome, int p_numero) {
+    public Passageiro(String p_nome) {
         this.nome = p_nome;
-        this.numero = p_numero;
     }
 
     public String get_nome() {
