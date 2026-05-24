@@ -18,7 +18,7 @@ public class Autocarro {
         }
         totalPassageiros++;
 
-        System.out.println(p.getNome() + " entrou no autocarro");
+        System.out.println(p.get_nome() + " entrou no autocarro");
     }
 
     public void saida_passageiros(String nome) {
@@ -28,27 +28,27 @@ public class Autocarro {
             return;
         }
 
-        if (inicio.passageiro.getNome().equalsIgnoreCase(nome)) { // remove as pessoas pelo nome, caso 1 ser o primeiro
-            System.out.println(inicio.passageiro.getNome() + " saiu do autocarro");
-            inicio = inicio.next; // remove o 1 nó
+        if (inicio.passageiro.get_nome().equalsIgnoreCase(nome)) { // remove as pessoas pelo nome, caso 1 ser o primeiro
+            System.out.println(inicio.passageiro.get_nome() + " saiu do autocarro");
+            inicio = inicio.proximo; // remove o 1 nó
             totalPassageiros--;
             return;
         }
 
-        NodePassageiro atual = inicio;
+        NodeAutocarro atual = inicio;
 
-        while (atual.next != null) { // procura o nó antes da pessoa
-            if (atual.next.passageiro.getNome().equalsIgnoreCase(nome)) {
+        while (atual.proximo != null) { // procura o nó antes da pessoa
+            if (atual.proximo.passageiro.get_nome().equalsIgnoreCase(nome)) {
 
-                System.out.println(atual.next.passageiro.getNome() + " saiu do autocarro");
+                System.out.println(atual.proximo.passageiro.get_nome() + " saiu do autocarro");
 
-                atual.next = atual.next.next;
+                atual.proximo = atual.proximo.proximo;
                 totalPassageiros--;
 
                 return;
             }
 
-            atual = atual.next;
+            atual = atual.proximo;
         }
 
         System.out.println("Passageiro não encontrado");
@@ -61,7 +61,7 @@ public class Autocarro {
         System.out.println("Passageiros no autocarro:");
 
         while (atual != null) { // percore a lista e imprime nomes
-            System.out.println("- " + atual.passageiro.getNome());
+            System.out.println("- " + atual.passageiro.get_nome());
             atual = atual.proximo;
         }
     }
