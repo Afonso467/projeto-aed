@@ -6,8 +6,8 @@ import java.util.Scanner;
 public class Main {
 
     static LinhaAutocarro linhaAutocarro = new LinhaAutocarro();
+
     public static void main(String[] args) {
-        
 
         Scanner scanner = new Scanner(System.in);
 
@@ -44,7 +44,7 @@ public class Main {
                         System.out.print("Opção: \n");
                         opcao = scanner.nextInt();
 
-                        if(opcao == 1) {
+                        if (opcao == 1) {
 
                         } else if (opcao == 2) {
 
@@ -82,12 +82,12 @@ public class Main {
 
                 default:
                     System.out.println("Opção inválida.");
-                    
+
             }
 
         } while (opcao != 0);
 
-        scanner.close();        
+        scanner.close();
         // testLinhaAutocarro();
         testAutocarro();
         testParagem();
@@ -95,34 +95,34 @@ public class Main {
     }
 
     /* Funções declaração */
-    
+
     private static void testParagem() {
-        
+
     }
+
     private static void testAutocarro() {
-        
+
     }
+
     private static void testPassageiro() {
-        
+
     }
 
     /* Opções menu */
     private static void criarLinha() {
-        
-        /* Verificar se a linha está vazia antes de criar a linha */
-        /*if (linhaAutocarro) {
 
-        }*/
+        /* Verificar se a linha está vazia antes de criar a linha */
+        /*
+         * if (linhaAutocarro) {
+         * 
+         * }
+         */
         linhaAutocarro.inserir_paragem("A", 10);
         linhaAutocarro.inserir_paragem("B", 20);
         linhaAutocarro.inserir_paragem("C", 12);
         linhaAutocarro.inserir_paragem("D", 0);
         linhaAutocarro.inserir_paragem("E", 4);
-
         linhaAutocarro.listar_percurso();
-        linhaAutocarro.remover_paragem("B");
-
-
         System.out.print("Linha criada.");
     }
 
@@ -135,15 +135,15 @@ public class Main {
     }
 
     public void adicionarPassageiros(String nome) {
-        
+
     }
 
     public void simularChegada() {
-        
+
     }
 
     public void ordenarParagens(int order) {
-        
+
     }
 
     public static void estadoLinha() {

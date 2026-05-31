@@ -1,16 +1,25 @@
 class Node {
     Paragem paragem;
     Node next;
+    Node prev;
 
     Node(Paragem paragem) {
         this.paragem = paragem;
         this.next = null;
+        this.prev = null;
     }
 }
 
 class LinhaAutocarro {
     private Node head;
+    private Node tail;
     private int size;
+
+    public LinhaAutocarro() {
+        head = null;
+        tail = null;
+        size = 0;
+    }
 
     public void inserir_paragem(String nome, int numeroPassageiros) {
 
@@ -18,14 +27,12 @@ class LinhaAutocarro {
 
         if (head == null) {
             head = novaParagem;
+            tail = novaParagem;
         } else {
-            Node current = head;
 
-            while (current.next != null) {
-                current = current.next;
-            }
-
-            current.next = novaParagem;
+            tail.next = novaParagem;
+            novaParagem.prev = tail;
+            tail = novaParagem;
         }
 
         size++;
@@ -38,8 +45,10 @@ class LinhaAutocarro {
         while (current != null) {
 
             System.out.println(
-                    "Nome Paragem: " + current.paragem.nome +
-                            ", Numero Passageiros: " + current.paragem.fila.totalPassageiros());
+                    "Nome Paragem: " +
+                            current.paragem.nome +
+                            ", Passageiros: " +
+                            current.paragem.fila.totalPassageiros());
 
             current = current.next;
         }
@@ -51,26 +60,40 @@ class LinhaAutocarro {
             return;
         }
 
-        // remover cabeça
-        if (head.paragem.nome.equals(nome)) {
-            head = head.next;
-            size--;
-            return;
-        }
-
         Node current = head;
 
-        while (current.next != null) {
+        while (current != null) {
 
-            if (current.next.paragem.nome.equals(nome)) {
+            if (current.paragem.nome.equals(nome)) {
 
-                current.next = current.next.next;
+                // único elemento
+                if (head == tail) {
+                    head = null;
+                    tail = null;
+                }
+
+                // remover head
+                else if (current == head) {
+                    head = head.next;
+                    head.prev = null;
+                }
+
+                // remover tail
+                else if (current == tail) {
+                    tail = tail.prev;
+                    tail.next = null;
+                }
+
+                // remover intermédio
+                else {
+
+                    current.prev.next = current.next;
+                    current.next.prev = current.prev;
+                }
                 size--;
                 return;
             }
-
             current = current.next;
         }
     }
-
 }
