@@ -38,30 +38,62 @@ public class Main {
                     break;
 
                 case 2:
-                    opcao = 0;
+
+                    int subOpcao;
+
                     do {
-                        System.out.print("1 - Remover paragem: | 2 - Adicionar paragem");
-                        System.out.print("Opção: \n");
-                        opcao = scanner.nextInt();
+                        System.out.println("\n==============================");
+                        System.out.println("  GESTÃO DE PARAGENS");
+                        System.out.println("==============================");
+                        System.out.println("1 - Remover paragem");
+                        System.out.println("2 - Adicionar paragem");
+                        System.out.print("Opção: ");
 
-                        if (opcao == 1) {
+                        subOpcao = scanner.nextInt();
+                        scanner.nextLine(); 
 
-                        } else if (opcao == 2) {
+                        if (subOpcao == 1) {
 
+                            System.out.print("Nome da paragem a remover: ");
+                            String nome = scanner.nextLine();
+
+                            linhaAutocarro.remover_paragem(nome);
+
+                        } 
+                        else if (subOpcao == 2) {
+
+                            System.out.print("Nome da paragem: ");
+                            String nome = scanner.nextLine();
+
+                            linhaAutocarro.inserir_paragem(nome,0);
+
+                        } 
+                        else {
+                            System.out.println("Opção inválida.");
                         }
-                    } while (opcao != 1 && opcao != 2);
+
+                    } while (subOpcao != 1 && subOpcao != 2);
+
                     break;
 
-                case 3:
-                    System.out.println(">> Adicionar passageiros");
-                    break;
+                    case 3:
 
+                        System.out.print("Nome da paragem: ");
+                        scanner.nextLine();
+                        String nome = scanner.nextLine();
+
+                        System.out.print("Número de passageiros a adicionar: ");
+                        int n = scanner.nextInt();
+
+                        linhaAutocarro.adicionar_passageiros(nome, n);
+
+                        break;
                 case 4:
                     System.out.println(">> Simular chegada do autocarro");
                     break;
 
                 case 5:
-                    System.out.println(">> Ordenar paragens");
+                    linhaAutocarro.ordenar_paragens();
                     break;
 
                 case 6:

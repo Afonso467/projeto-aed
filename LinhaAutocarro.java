@@ -11,6 +11,7 @@ class Node {
 }
 
 class LinhaAutocarro {
+
     private Node head;
     private Node tail;
     private int size;
@@ -29,7 +30,6 @@ class LinhaAutocarro {
             head = novaParagem;
             tail = novaParagem;
         } else {
-
             tail.next = novaParagem;
             novaParagem.prev = tail;
             tail = novaParagem;
@@ -46,9 +46,10 @@ class LinhaAutocarro {
 
             System.out.println(
                     "Nome Paragem: " +
-                            current.paragem.nome +
-                            ", Passageiros: " +
-                            current.paragem.fila.totalPassageiros());
+                    current.paragem.get_nome() +
+                    ", Passageiros: " +
+                    current.paragem.fila.totalPassageiros()
+            );
 
             current = current.next;
         }
@@ -56,44 +57,101 @@ class LinhaAutocarro {
 
     public void remover_paragem(String nome) {
 
-        if (head == null) {
-            return;
-        }
+        if (head == null) return;
 
         Node current = head;
 
         while (current != null) {
 
-            if (current.paragem.nome.equals(nome)) {
+            if (current.paragem.get_nome().equalsIgnoreCase(nome)) {
 
-                // único elemento
                 if (head == tail) {
                     head = null;
                     tail = null;
                 }
 
-                // remover head
                 else if (current == head) {
                     head = head.next;
                     head.prev = null;
                 }
 
-                // remover tail
                 else if (current == tail) {
                     tail = tail.prev;
                     tail.next = null;
                 }
 
-                // remover intermédio
                 else {
-
                     current.prev.next = current.next;
                     current.next.prev = current.prev;
                 }
+
                 size--;
                 return;
             }
+
             current = current.next;
         }
+
+        System.out.println("Paragem não encontrada.");
     }
+
+    // este vai servir para o caso 3 para adicionar os passageiross
+    public void adicionar_passageiros(String nomeParagem, int quantidade) {
+
+        Node current = head;
+
+        while (current != null) {
+
+            if (current.paragem.get_nome().equalsIgnoreCase(nomeParagem)) {
+
+                for (int i = 0; i < quantidade; i++) {
+                    current.paragem.adicionar_passageiro(
+                        new Passageiro("P" + (i + 1))
+                    );
+                }
+
+                System.out.println("Passageiros adicionados à paragem " + nomeParagem);
+                return;
+            }
+
+            current = current.next;
+        }
+
+        System.out.println("Paragem não encontrada.");
+    }
+
+    //---------------------
+
+    public void ordenar_paragens() {
+
+    if (head == null) {
+        System.out.println("Linha vazia.");
+        return;
+    }
+
+    Node i = head;
+
+    while (i != null) {
+
+        Node j = i.next;
+
+        while (j != null) {
+
+            if (i.paragem.get_nome().compareToIgnoreCase(j.paragem.get_nome()) > 0) {
+
+                Paragem temp = i.paragem;
+                i.paragem = j.paragem;
+                j.paragem = temp;
+            }
+
+            j = j.next;
+        }
+
+        i = i.next;
+    }
+
+    System.out.println("\nParagens ordenadas por nome:\n");
+
+    listar_percurso(); 
+}
 }
