@@ -22,10 +22,19 @@ class LinhaAutocarro {
         size = 0;
     }
 
-    public void inserir_paragem(String nome, int numeroPassageiros) {
+    public void inserir_paragem(String nome) {
 
-        Node novaParagem = new Node(new Paragem(nome, numeroPassageiros));
+        Node novaParagem = new Node(new Paragem(nome));
+        Node current = head;
 
+        while (current != null) {
+            if(current.paragem.get_nome().equalsIgnoreCase(nome)) {
+                System.out.println("Já existe uma paragem com este nome, é favor não repetir nomes.");
+                return;
+            }
+            current = current.next;
+        }
+        
         if (head == null) {
             head = novaParagem;
             tail = novaParagem;
@@ -34,7 +43,7 @@ class LinhaAutocarro {
             novaParagem.prev = tail;
             tail = novaParagem;
         }
-
+        // System.out.println("Linha autocarro: Paragem criada");
         size++;
     }
 
@@ -87,6 +96,8 @@ class LinhaAutocarro {
 
                 size--;
                 return;
+            } else {
+                System.out.println("Não existe nenhuma paragem com o nome de: " + nome);
             }
 
             current = current.next;
@@ -95,8 +106,7 @@ class LinhaAutocarro {
         System.out.println("Paragem não encontrada.");
     }
 
-    // este vai servir para o caso 3 para adicionar os passageiross
-    public void adicionar_passageiros(String nomeParagem, int quantidade) {
+    public void adicionar_passageiros(String nomeParagem, String nomePassageiro) {
 
         Node current = head;
 
@@ -104,12 +114,7 @@ class LinhaAutocarro {
 
             if (current.paragem.get_nome().equalsIgnoreCase(nomeParagem)) {
 
-                for (int i = 0; i < quantidade; i++) {
-                    current.paragem.adicionar_passageiro(
-                        new Passageiro("P" + (i + 1))
-                    );
-                }
-
+                current.paragem.adicionar_passageiro(new Passageiro(nomePassageiro));
                 System.out.println("Passageiros adicionados à paragem " + nomeParagem);
                 return;
             }
@@ -120,38 +125,71 @@ class LinhaAutocarro {
         System.out.println("Paragem não encontrada.");
     }
 
-    //---------------------
+    public void ordenar_paragens_por_nome() {
 
-    public void ordenar_paragens() {
-
-    if (head == null) {
-        System.out.println("Linha vazia.");
-        return;
-    }
-
-    Node i = head;
-
-    while (i != null) {
-
-        Node j = i.next;
-
-        while (j != null) {
-
-            if (i.paragem.get_nome().compareToIgnoreCase(j.paragem.get_nome()) > 0) {
-
-                Paragem temp = i.paragem;
-                i.paragem = j.paragem;
-                j.paragem = temp;
-            }
-
-            j = j.next;
+        /* Selection sort */
+        if (head == null) {
+            System.out.println("Linha vazia.");
+            return;
         }
 
-        i = i.next;
+        Node i = head;
+
+        while (i != null) {
+
+            Node j = i.next;
+
+            while (j != null) {
+
+                if (i.paragem.get_nome().compareToIgnoreCase(j.paragem.get_nome()) > 0) {
+
+                    Paragem temp = i.paragem;
+                    i.paragem = j.paragem;
+                    j.paragem = temp;
+                }
+
+                j = j.next;
+            }
+
+            i = i.next;
+        }
+
+        System.out.println("\nParagens ordenadas por nome:\n");
+
+        listar_percurso(); 
     }
 
-    System.out.println("\nParagens ordenadas por nome:\n");
+    public void ordenar_paragens_por_num_passageiros() {
 
-    listar_percurso(); 
-}
+        /* Bubble sort */
+        if (head == null) {
+            System.out.println("Linha vazia.");
+            return;
+        }
+
+        Node i = head;
+
+        while (i != null) {
+
+            Node j = i.next;
+
+            while (j != null) {
+
+                if (i.paragem.get_nome().compareToIgnoreCase(j.paragem.get_nome()) > 0) {
+
+                    Paragem temp = i.paragem;
+                    i.paragem = j.paragem;
+                    j.paragem = temp;
+                }
+
+                j = j.next;
+            }
+
+            i = i.next;
+        }
+
+        System.out.println("\nParagens ordenadas por nome:\n");
+
+        listar_percurso(); 
+    }
 }

@@ -6,7 +6,7 @@ public class Paragem {
     String nome;
     FilaPassageiros fila;
 
-    public Paragem(String nome, int nPassageiros) {
+    public Paragem(String nome) {
         this.nome = nome;
         this.fila = new FilaPassageiros();
     }
