@@ -30,4 +30,8 @@ public class Paragem {
     public String get_nome() {
         return nome;
     }
+    
+    public int get_num_passageiros() {
+        return fila.totalPassageiros();
+    }
 }

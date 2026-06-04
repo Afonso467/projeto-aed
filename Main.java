@@ -91,7 +91,7 @@ public class Main {
     }
 
     public static void adicionarPassageiros(String nomeParagem, int nPassageiros) {
-        
+        scanner.nextLine();
         for(int i = 0; i < nPassageiros; i++) {
             System.out.print("Nome passageiro: ");
             String nomePassageiro = scanner.nextLine();
@@ -180,8 +180,8 @@ public class Main {
             scanner.nextLine(); 
 
             switch (opcao) {
-                case 1 -> {ordenarParagemPorNumeroPassageiros();}
-                case 2 -> {ordenarParagensPorNome();}
+                case 1 -> {ordenarParagensPorNome();}
+                case 2 -> {ordenarParagemPorNumeroPassageiros();}
                 default -> System.out.println("Opção inválida.");
             }      
 

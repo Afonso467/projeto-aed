@@ -161,35 +161,34 @@ class LinhaAutocarro {
 
     public void ordenar_paragens_por_num_passageiros() {
 
-        /* Bubble sort */
         if (head == null) {
             System.out.println("Linha vazia.");
             return;
         }
 
-        Node i = head;
+        boolean trocou;
 
-        while (i != null) {
+        do {
+            trocou = false;
+            Node atual = head;
 
-            Node j = i.next;
+            while (atual.next != null) {
 
-            while (j != null) {
+                if (atual.paragem.get_num_passageiros() < atual.next.paragem.get_num_passageiros()) {
 
-                if (i.paragem.get_nome().compareToIgnoreCase(j.paragem.get_nome()) > 0) {
+                    Paragem temp = atual.paragem;
+                    atual.paragem = atual.next.paragem;
+                    atual.next.paragem = temp;
 
-                    Paragem temp = i.paragem;
-                    i.paragem = j.paragem;
-                    j.paragem = temp;
+                    trocou = true;
                 }
 
-                j = j.next;
+                atual = atual.next;
             }
 
-            i = i.next;
-        }
+        } while (trocou);
 
-        System.out.println("\nParagens ordenadas por nome:\n");
-
-        listar_percurso(); 
+        System.out.println("\nParagens ordenadas por número de passageiros:\n");
+        listar_percurso();
     }
 }
