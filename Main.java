@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class Main {
 
     static LinhaAutocarro linhaAutocarro = new LinhaAutocarro();
+    static Autocarro autocarro = new Autocarro();
     private static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) {
 
@@ -36,7 +37,7 @@ public class Main {
                     break;
 
                 case 4:
-                    System.out.println(">> Simular chegada do autocarro");
+                    simularChegada();
                     break;
 
                 case 5:
@@ -100,7 +101,7 @@ public class Main {
     }
 
     public static void simularChegada() {
-
+        printMenuSimularChegada();
     }
 
     public static void ordenarParagemPorNumeroPassageiros() {
@@ -186,6 +187,44 @@ public class Main {
             }      
 
         } while (opcao != 1 && opcao != 2);
+    }
+    public static void printMenuSimularChegada() {
+        System.out.println("\n==============================");
+        System.out.println("  Menu autocarro ");
+        System.out.println("==============================");
+        System.out.println("1 - Proxima Paragem");
+        System.out.println("2 - Entrada de Passageiros");
+        System.out.println("3 - Saída de Passageiros");
+        System.out.println("4 - Voltar atrás");
+        System.out.println("==============================");
+        System.out.print("Escolha uma opção: ");
+
+        int opcao;
+
+        do {
+                        
+            opcao = scanner.nextInt();
+            scanner.nextLine(); 
+
+            switch (opcao) {
+                case 1 -> {linhaAutocarro.proxima_paragem();}
+                case 2 -> {
+                    System.out.println("Número de passageiros a embarcar: ");
+                    int nPassageiros = scanner.nextInt(); 
+                    autocarro.entrada_passageiros(linhaAutocarro, nPassageiros);
+                }
+                case 3 -> {
+                    System.out.println("Número de passageiros a embarcar: ");
+                    int nPassageiros = scanner.nextInt();
+                    autocarro.saida_passageiros(linhaAutocarro, nPassageiros);
+                }
+                case 4 -> {
+                    break;
+                }
+                default -> System.out.println("Opção inválida.");
+            }      
+
+        } while (opcao != 1 && opcao != 2 && opcao != 3);
     }
 }
 

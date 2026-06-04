@@ -3,22 +3,65 @@ public class Autocarro {
 
     private NodeAutocarro inicio; // aponta para o inicio do no ou seja primeiro passageiro
     private int totalPassageiros; // contador de passageiros
+    private NodeAutocarro fim;
 
     public Autocarro() {
         this.inicio = null;
+        this.fim = null;
         this.totalPassageiros = 0;
     }
 
-    public void entrada_passageiros(Passageiro p) {
+    public void entrada_passageiros(LinhaAutocarro linhaAutocarro, int nPassageiros) {
 
-        NodeAutocarro newNode = new NodeAutocarro(p);
-
-        if (inicio == null) {
-            inicio = newNode; // se o autocarro estiver vazio cria um novo no
+        Paragem paragemAtual = linhaAutocarro.nodeAtual.paragem;
+        if(nPassageiros > paragemAtual.get_num_passageiros()) {
+            System.out.println("Não é possiver entrar mais passageiros no autocarro do que existem na paragem");
+            return;
         }
-        totalPassageiros++;
 
-        System.out.println(p.get_nome() + " entrou no autocarro");
+        for (int i = 0; i < nPassageiros; i++) {
+
+            Passageiro p = paragemAtual.fila.removerPassageiro();
+            NodeAutocarro novo = new NodeAutocarro(p);
+
+            if (inicio == null) {
+                inicio = novo;
+                fim = novo;
+
+            } else {
+                fim.proximo = novo;
+                fim = novo;
+            }
+            totalPassageiros++;
+
+            System.out.println(p.get_nome() +" entrou no autocarro.");
+        }
+    }
+    public void saida_passageiros(LinhaAutocarro linhaAutocarro, int nPassageiros) {
+        Paragem paragemAtual = linhaAutocarro.nodeAtual.paragem;
+        if(nPassageiros > totalPassageiros) {
+            System.out.println("Não é possiver remover mais passageiros do que existem");
+            return;
+        }
+
+        for (int i = 0; i < nPassageiros; i++) {
+
+            if (inicio == null) {
+                return;
+            }
+
+            Passageiro p = inicio.passageiro;
+            inicio = inicio.proximo;
+
+            if (inicio == null) {
+                fim = null;
+            }
+
+            totalPassageiros--;
+            paragemAtual.adicionar_passageiro(p);
+
+            System.out.println(p.get_nome() +" saiu do autocarro.");
+        }
     }
 
     public void saida_passageiros(String nome) {

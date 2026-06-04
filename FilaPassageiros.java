@@ -68,4 +68,7 @@ public class FilaPassageiros {
             atual = atual.next;
         }
     }
+    public Passageiro get_passageiro_atual() {
+        return inicio.passageiro;
+    }
 }

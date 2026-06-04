@@ -14,12 +14,41 @@ class LinhaAutocarro {
 
     private Node head;
     private Node tail;
+    public  Node nodeAtual;
     private int size;
+    private boolean sentidoInverso = false;
 
     public LinhaAutocarro() {
         head = null;
         tail = null;
+        nodeAtual = null;
         size = 0;
+    }
+
+    public void proxima_paragem() {
+
+        if (head == null || nodeAtual == null) {
+            System.out.println("É preciso criar uma linha antes de fazer paragens");
+            return;  
+        } 
+
+        if(!sentidoInverso) {
+            if(nodeAtual.next != null) {
+                nodeAtual = nodeAtual.next;
+            } else {
+                sentidoInverso = true;
+                nodeAtual = nodeAtual.prev;
+            }
+        } else {
+            if (nodeAtual.prev != null) {
+                nodeAtual = nodeAtual.prev;
+
+            } else {
+                sentidoInverso = false;
+                nodeAtual = nodeAtual.next;
+            }
+        }
+        System.err.println("O autocarro chegou à estação: " + nodeAtual.paragem.get_nome());
     }
 
     public void inserir_paragem(String nome) {
@@ -36,8 +65,10 @@ class LinhaAutocarro {
         }
         
         if (head == null) {
+            nodeAtual = novaParagem;
             head = novaParagem;
             tail = novaParagem;
+            
         } else {
             tail.next = novaParagem;
             novaParagem.prev = tail;
@@ -54,10 +85,11 @@ class LinhaAutocarro {
         while (current != null) {
 
             System.out.println(
-                    "Nome Paragem: " +
-                    current.paragem.get_nome() +
+                "Nome Paragem: " +
+                current.paragem.get_nome() +
                     ", Passageiros: " +
-                    current.paragem.fila.totalPassageiros()
+                    current.paragem.fila.totalPassageiros() +
+                    (current == nodeAtual ? " <- AUTOCARRO" : "")
             );
 
             current = current.next;
