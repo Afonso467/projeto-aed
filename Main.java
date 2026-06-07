@@ -214,7 +214,7 @@ public class Main {
                     autocarro.entrada_passageiros(linhaAutocarro, nPassageiros);
                 }
                 case 3 -> {
-                    System.out.println("Número de passageiros a embarcar: ");
+                    System.out.println("Número de passageiros a desembarcar: ");
                     int nPassageiros = scanner.nextInt();
                     autocarro.saida_passageiros(linhaAutocarro, nPassageiros);
                 }
