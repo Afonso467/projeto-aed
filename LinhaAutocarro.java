@@ -25,12 +25,17 @@ class LinhaAutocarro {
         size = 0;
     }
 
-    public void proxima_paragem() {
-
+    public boolean is_null () {
         if (head == null || nodeAtual == null) {
             System.out.println("É preciso criar uma linha antes de fazer paragens");
-            return;  
+            return false;  
         } 
+        return true;
+    }
+
+    public void proxima_paragem() {
+
+        is_null();
 
         if(!sentidoInverso) {
             if(nodeAtual.next != null) {
@@ -48,7 +53,7 @@ class LinhaAutocarro {
                 nodeAtual = nodeAtual.next;
             }
         }
-        System.err.println("O autocarro chegou à estação: " + nodeAtual.paragem.get_nome());
+        System.out.println("O autocarro chegou à estação: " + nodeAtual.paragem.get_nome());
     }
 
     public void inserir_paragem(String nome) {
@@ -128,10 +133,7 @@ class LinhaAutocarro {
 
                 size--;
                 return;
-            } else {
-                System.out.println("Não existe nenhuma paragem com o nome de: " + nome);
-            }
-
+            } 
             current = current.next;
         }
 
