@@ -15,19 +15,18 @@ class LinhaAutocarro {
     private Node head;
     private Node tail;
     public  Node nodeAtual;
-    private int size;
+
     private boolean sentidoInverso = false;
 
     public LinhaAutocarro() {
         head = null;
         tail = null;
         nodeAtual = null;
-        size = 0;
+      
     }
 
-    public boolean is_null () {
-        if (head == null || nodeAtual == null) {
-            System.out.println("É preciso criar uma linha antes de fazer paragens");
+    public boolean exists () {
+        if (head == null) {
             return false;  
         } 
         return true;
@@ -35,7 +34,7 @@ class LinhaAutocarro {
 
     public void proxima_paragem() {
 
-        is_null();
+        exists();
 
         if(!sentidoInverso) {
             if(nodeAtual.next != null) {
@@ -80,7 +79,6 @@ class LinhaAutocarro {
             tail = novaParagem;
         }
         // System.out.println("Linha autocarro: Paragem criada");
-        size++;
     }
 
     public void listar_percurso() {
@@ -130,8 +128,6 @@ class LinhaAutocarro {
                     current.prev.next = current.next;
                     current.next.prev = current.prev;
                 }
-
-                size--;
                 return;
             } 
             current = current.next;

@@ -16,7 +16,8 @@ public class Main {
      */
     private static void criarLinha() {
         
-        if(linhaAutocarro.is_null()) {
+        if(linhaAutocarro.exists()) {
+            System.out.print("");
             System.out.print("A linha base já foi criada.");
             return;
         }
@@ -28,7 +29,9 @@ public class Main {
         linhaAutocarro.inserir_paragem("E");
         estadoLinha();
         
-        if(!linhaAutocarro.is_null()) {
+
+        if(linhaAutocarro.exists()) {
+            System.out.print("");
             System.out.print("Linha base criada.");
         }
         
